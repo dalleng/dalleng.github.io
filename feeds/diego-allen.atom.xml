@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Diego Allen</title><link href="/" rel="alternate"></link><link href="/feeds/diego-allen.atom.xml" rel="self"></link><id>/</id><updated>2014-10-25T00:00:00+02:00</updated><entry><title>Análisis de plataformas móviles en Paraguay usando la API de Twitter</title><link href="/analisis-de-plataformas-moviles-en-paraguay-usando-la-api-de-twitter.html" rel="alternate"></link><updated>2014-10-25T00:00:00+02:00</updated><author><name>Diego Allen</name></author><id>tag:,2014-10-25:analisis-de-plataformas-moviles-en-paraguay-usando-la-api-de-twitter.html</id><summary type="html">&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Diego Allen</title><link href="/" rel="alternate"></link><link href="/feeds/diego-allen.atom.xml" rel="self"></link><id>/</id><updated>2015-01-20T00:00:00+01:00</updated><entry><title>Analyzing Mobile Marketshare in Paraguay using Twitter's API</title><link href="/analyzing-mobile-marketshare-in-paraguay-using-twitters-api.html" rel="alternate"></link><updated>2015-01-20T00:00:00+01:00</updated><author><name>Diego Allen</name></author><id>tag:,2014-10-25:analyzing-mobile-marketshare-in-paraguay-using-twitters-api.html</id><summary type="html">&lt;style type="text/css"&gt;.clearfix{*zoom:1}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0}
 .clearfix:after{clear:both}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0}
 .input-block-level{display:block;width:100%;min-height:30px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -1456,10 +1456,6 @@ pre.ipynb {
     padding: 5px 5px 5px 10px;
 }
 
-.input, .output {
-    margin: 10px;
-}
-
 /* DataFrame */
 table.dataframe {
     font-family: Arial, sans-serif;
@@ -1479,14 +1475,10 @@ table.dataframe th, td {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Ante la escasa cantidad de información en internet sobre el marketshare de las plataformas móviles en Paraguay decidí buscar alguna manera obtener esos datos, que son bastantes interesantes para tener en cuenta a la hora de desarrollar software. De lo poco que encontré y esta relativamente actualizado:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www.lanacion.com.py/articulo/114262-mas-de-700000-paraguayos-se-conectan-via-smartphones.html"&gt;Más de 700.000 paraguayos se conectan vía smartphones&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://www.latamclick.com/2014/02/redes-sociales-en-paraguay-estadisticas-completas-diciembre-2013.html"&gt;REDES SOCIALES EN PARAGUAY, ESTADÍSTICAS DICIEMBRE 2013&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Probablemente las telefónicas o los sitios webs con un tráfico importante tengan estadísticas, pero no conozco una fuente pública. Como fuente de datos usé Twitter, ya que de los metadatos de los &lt;a href="https://dev.twitter.com/overview/api/tweets"&gt;tweet&lt;/a&gt; se puede obtener la fuente. Ej: &amp;#39;Twitter for iPhone&amp;#39;, &amp;#39;Twitter for Android&amp;#39;, etc. Partí de la premisa de que lo que sea que haga tenia que ser reproducible asi que &lt;a href="https://github.com/dalleng/py-tweets"&gt;acá&lt;/a&gt; va mi código y el ipython notebook en el que esta basado este post. Seguramente no todas las personas con smartphones en el Paraguay usen Twitter, pero definitivamente es una muestra considerable e interesante de analizar.&lt;/p&gt;
-&lt;h2 id="an-lisis-con-la-api-de-streaming-"&gt;Análisis con la API de Streaming.&lt;/h2&gt;
-&lt;p&gt;Mi primer intento fue usar la &lt;a href="https://dev.twitter.com/streaming/public"&gt;api streaming&lt;/a&gt; con un filtro por geolocalización y guardar los tweets a analizar en mongodb. El script para eso:&lt;/p&gt;
+&lt;p&gt;Due to the limited amount of information regarding mobile marketshare in my country Paraguay, I decided to look for a way to get these stats. This might be useful for developers at the time of choosing which platform to target or prioritize. Probably cell phone carriers and local websites with a high traffic have this kind of stats, but I haven&amp;#39;t found a public source.&lt;/p&gt;
+&lt;p&gt;As the data source to derive the information I&amp;#39;m looking for I decided to use Twitter&amp;#39;s API, &lt;a href="https://dev.twitter.com/overview/api/tweets"&gt;tweet&lt;/a&gt; metadata includes the source used to tweet (&amp;#39;Twitter for Android&amp;#39;, &amp;#39;Twitter for iPhone&amp;#39;, etc.) and from that the mobile platform can be inferred. The code I used and the ipython notebook on which this post is based are available in &lt;a href="https://github.com/dalleng/py-tweets"&gt;this&lt;/a&gt; github repo. Probably not all people in the country use Twitter, but it is popular enough for this analysis to show relevant results.&lt;/p&gt;
+&lt;h2 id="analysis-using-the-streaming-api-"&gt;Analysis using the Streaming API.&lt;/h2&gt;
+&lt;p&gt;The first approach I took was to use the &lt;a href="https://dev.twitter.com/streaming/public"&gt;streaming api&lt;/a&gt; with a geolocation filter to gather tweets and store them in a mongodb database for later processing.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;&lt;span class="keyword"&gt;from&lt;/span&gt; twython &lt;span class="keyword"&gt;import&lt;/span&gt; TwythonStreamer
 
 &lt;span class="keyword"&gt;import&lt;/span&gt; pymongo
@@ -1548,7 +1540,7 @@ OAUTH_TOKEN_SECRET = &lt;span class="string"&gt;'oauth-token-secret'&lt;/span&gt
 &lt;span class="keyword"&gt;if&lt;/span&gt; __name__ == &lt;span class="string"&gt;'__main__'&lt;/span&gt;:
     main()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Para el análisis de los tweets guardados usé &lt;a href="http://ipython.org/"&gt;IPython&lt;/a&gt;, &lt;a href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt; y &lt;a href="http://api.mongodb.org/python/current/"&gt;pymongo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To analyze tweets &lt;a href="http://ipython.org/"&gt;IPython&lt;/a&gt;, &lt;a href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt; and &lt;a href="http://api.mongodb.org/python/current/"&gt;pymongo&lt;/a&gt; were used.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1585,7 +1577,7 @@ In&amp;nbsp;[1]:
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Los tweets almacenados son de un periodo de aproximadamente un mes (entre finales Julio y Agosto). De 891755 tweets solamente tenemos 29257 usuarios. Pocas personas generan mucho contenido, probablemente mucha gente se limite a leer y tuitee solo ocasionalmente si es que lo hace.&lt;/p&gt;
+&lt;p&gt;The script run for about a month (between the end of July/2014 and August/2014). From 891755 tweets gathered there I found 29257 unique users. Twitter, as many other online services with user-generated content, shows that a reduced amount of people generate much of the content. Also learned later by observing tweets obtained from my crawler (see Approach 2) that many people has geolocation turned off.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1662,7 +1654,7 @@ In&amp;nbsp;[5]:
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Limpiando los sources, haciendo merge de las columnas equivalentes y haciendo el conteo llegamos a la lista de fuentes que generan mas tweets. Lo que más me llamó la atención es lo mucho que se usan Foursquare e Instagram, mas locales deberían sacarle provecho a Foursquare.&lt;/p&gt;
+&lt;p&gt;By cleaning the sources, doing some merges between equivalent columns and counting, the list of the most popular sources is obtained. Instagram and Twitter are huge.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1727,7 +1719,7 @@ dtype: int64
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Para poder obtener estadísticas del marketshare de plataformas móviles utilizamos todas las fuentes mobile (&amp;#39;Twitter for Android&amp;#39;, &amp;#39;Twitter for iPhone&amp;#39;, etc.). Al discretizar los datos por plataforma móvil y eliminar duplicados se llega a las estadísticas buscadas. Android es ampliamente la plataforma mas utilizada, iOS en un no despreciable segundo lugar.&lt;/p&gt;
+&lt;p&gt;To get mobile platforms stats, which is what I was really interested in, I used only mobile sources (&amp;#39;Twitter for Android&amp;#39;, &amp;#39;Twitter for iPhone&amp;#39;, etc.) and also eliminated duplicates, so every pair of (user_id, source) is only counted once. Here are the results:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2108,7 +2100,8 @@ f8JpLW8AAAAFSURBVADIQreTTuk8DwAAAABJRU5ErkJggg==
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="crawling"&gt;Crawling&lt;/h2&gt;
-&lt;p&gt;El análisis usando la api de streaming me dejo dudando, especialemente el hecho de que de ~800k tweets pudimos obtener apenas ~29K usuarios únicos y decidí probar un segundo enfoque. Podemos explotar el hecho de que en Twitter existen cuentas con muchísimos followers (gente famosa, medios de comunicación, etc.) y hacer un simple crawler que guarde todos los tweets de los followers de alguna cuenta influyente del plano nacional. El analísis posterior surge de analizar los tweets de todos los followers de &lt;a href="https://www.google.com/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=1&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0CB8QFjAA&amp;amp;url=https%3A%2F%2Ftwitter.com%2Fabcdigital&amp;amp;ei=NfFKVPGnEJO6ggT46oGYDg&amp;amp;usg=AFQjCNGUaFsk2lXlcoQyNqkhS_8_0IScHg&amp;amp;bvm=bv.77880786,d.eXY"&gt;@abcdigital&lt;/a&gt;. Este es el script que use:&lt;/p&gt;
+&lt;p&gt;The analysis using the streaming API left me with some doubts, specially the fact that from around 800k tweets there were only 29k unique users. Maybe by following another approach a bigger sample could be obtained. Twitter has the interesting property that there are accounts (celebrities, athletes, news outlets, etc.) that have a really large amount of followers, so without using a graph traversal algorithm but instead a simple crawler that fetches followers&amp;#39; tweets we can get an interesting sample of tweets for a given demographic. The following analysis was made by crawling the followers of &lt;a href="https://twitter.com/abcdigital"&gt;@abcdigital&lt;/a&gt;, the most popular newspaper in the country.&lt;/p&gt;
+&lt;p&gt;The crawler consisted originally of one thread that fetched followers and stores them into a queue and another thread that popped users off the queue and fetched the user&amp;#39;s tweets, all of this using a single api key. While writing the code I&amp;#39;ve noticed that due to twitter&amp;#39;s api limits this would take a very long time, in particular the part that obtained user&amp;#39;s tweets. The &lt;a href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline"&gt;statuses/user_timeline&lt;/a&gt; endpoint has a limit of 300 requests per 15 minute window, &lt;a href="https://twitter.com/abcdigital"&gt;@abcdigital&lt;/a&gt; has around 240k followers so if using a single api key it  would take 240k / 300 = 800 15-min windows and a total time of 800 * 15 min = 12000 min (~8 days). So I ended up using multiple api keys and a one thread per api key, this was the simplest way to modifiy the code I had already written to fetch tweets from multiple users in parallel and since this is I/O bound python&amp;#39;s &lt;a href="https://wiki.python.org/moin/GlobalInterpreterLock"&gt;GIL&lt;/a&gt; would not be a problem.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;&lt;span class="keyword"&gt;import&lt;/span&gt; time
 &lt;span class="keyword"&gt;import&lt;/span&gt; Queue
 &lt;span class="keyword"&gt;import&lt;/span&gt; datetime
@@ -2320,7 +2313,7 @@ logging.basicConfig(
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Hacemos un análisis similar al hecho para los datos obtenidos de la api streaming, pero yendo directo a las estadísticas de los sistemas operativos mobile.&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s a similar analysis to the one done before, but going straight to the mobile platform stats.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2347,7 +2340,7 @@ In&amp;nbsp;[2]:
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Tenemos 3446836 tweets de 240225 personas.&lt;/p&gt;
+&lt;p&gt;3446836 tweets were obtained from 240225 users.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2424,7 +2417,7 @@ In&amp;nbsp;[14]:
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Discretizamos por plataforma móvil y eliminamos los duplicados como hicimos anteriormente. Me resulta muy sospechoso que BlackBerry ocupe el segundo lugar, habria que entrar a jugar con las fechas, los dias de gloria de BB ya pasaron y ya no se ven tantos.&lt;/p&gt;
+&lt;p&gt;By grouping according to mobile platform and deleting duplicates entries as done before we get the following stats. I found it a bit odd that BlackBerry appeared second, they were once very popular but nowadays I hardly see anyone using them.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2850,7 +2843,7 @@ ZmaF4dAzM7PCcOiZmVlh/BddnLtrCG3YSQAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Probamos el mismo análisis pero limitando los tweets solamente al 2014&lt;/p&gt;
+&lt;p&gt;I repeated the same process, but now limiting the tweets to the year 2014 and indeed BlackBerry&amp;#39;s marketshare dropped.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2900,7 +2893,9 @@ dtype: int64
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Este último gráfico muestra un panorama mas acorde a la realidad actual creo yo.&lt;/p&gt;
+&lt;p&gt;And here are the final results with Android and iOS in the first two spots, as in most markets. BlackBerry in a distant third place and Windows Phone growing. &lt;/p&gt;
+&lt;p&gt;Although these results were obtained from a bigger sample than the first approach, keep in mind that these numbers are subject to a certain margin of error since we don&amp;#39;t actually have the location (by observing the data I&amp;#39;ve noticed most tweets did not have geolocation data) and I&amp;#39;m also assuming that &lt;a href="https://twitter.com/abcdigital"&gt;@abcdigital&lt;/a&gt; followers represent a homogenous distribution of the Paraguayan population. Having said that, this distribution seems like an accurate representation
+of the current marketshare.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
