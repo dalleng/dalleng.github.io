@@ -1519,8 +1519,8 @@ table.dataframe th, td {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Due to the limited amount of information regarding mobile marketshare in my country Paraguay, I decided to look for a way to get these stats. This might be useful for developers at the time of choosing which platform to target or prioritize. Probably cell phone carriers and local websites with a high traffic have this kind of stats, but I haven&#39;t found a public source.</p>
-<p>As the data source to derive the information I&#39;m looking for I decided to use Twitter&#39;s API, <a href="https://dev.twitter.com/overview/api/tweets">tweet</a> metadata includes the source used to tweet (&#39;Twitter for Android&#39;, &#39;Twitter for iPhone&#39;, etc.) and from that the mobile platform can be inferred. The code I used and the ipython notebook on which this post is based are available in <a href="https://github.com/dalleng/py-tweets">this</a> github repo. Probably not all people in the country use Twitter, but it is popular enough for this analysis to show relevant results.</p>
+<p>Due to the limited amount of information regarding mobile marketshare in my country (Paraguay), I decided to look for a way to get these stats. The data might be useful for developers at the time of choosing which platform to target or prioritize. Probably cell phone carriers and local websites with a high traffic have this kind of stats, but I haven&#39;t found a public source.</p>
+<p>I used Twitter&#39;s API to as the data source for this experiment, <a href="https://dev.twitter.com/overview/api/tweets">tweet</a> metadata includes the source used to tweet (&#39;Twitter for Android&#39;, &#39;Twitter for iPhone&#39;, etc.) and with that information the mobile platform can be inferred. The code I used and the ipython notebook on which this post is based are available in <a href="https://github.com/dalleng/py-tweets">this</a> github repo. Probably not all people in the country use Twitter, but it is popular enough for this analysis to show relevant results.</p>
 <h2 id="analysis-using-the-streaming-api-">Analysis using the Streaming API.</h2>
 <p>The first approach I took was to use the <a href="https://dev.twitter.com/streaming/public">streaming api</a> with a geolocation filter to gather tweets and store them in a mongodb database for later processing.</p>
 <pre><code class="language-python"><span class="keyword">from</span> twython <span class="keyword">import</span> TwythonStreamer
@@ -1621,7 +1621,7 @@ In&nbsp;[1]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The script run for about a month (between the end of July/2014 and August/2014). From 891755 tweets gathered there I found 29257 unique users. Twitter, as many other online services with user-generated content, shows that a reduced amount of people generate much of the content. Also learned later by observing tweets obtained from my crawler (see Approach 2) that many people has geolocation turned off.</p>
+<p>The script run for about a month (between the end of July/2014 and August/2014). From 891755 tweets gathered, I found 29257 unique users. The number of unique users is rather low, this shows that a reduced amount of people generate much of the content (as usually occurs in sites with user-generated content). Also learned later by observing tweets obtained from my crawler (see Approach 2) that many people turn geolocation off.</p>
 </div>
 </div>
 </div>
@@ -2145,7 +2145,7 @@ f8JpLW8AAAAFSURBVADIQreTTuk8DwAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="crawling">Crawling</h2>
 <p>The analysis using the streaming API left me with some doubts, specially the fact that from around 800k tweets there were only 29k unique users. Maybe by following another approach a bigger sample could be obtained. Twitter has the interesting property that there are accounts (celebrities, athletes, news outlets, etc.) that have a really large amount of followers, so without using a graph traversal algorithm but instead a simple crawler that fetches followers&#39; tweets we can get an interesting sample of tweets for a given demographic. The following analysis was made by crawling the followers of <a href="https://twitter.com/abcdigital">@abcdigital</a>, the most popular newspaper in the country.</p>
-<p>The crawler consisted originally of one thread that fetched followers and stores them into a queue and another thread that popped users off the queue and fetched the user&#39;s tweets, all of this using a single api key. While writing the code I&#39;ve noticed that due to twitter&#39;s api limits this would take a very long time, in particular the part that obtained user&#39;s tweets. The <a href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">statuses/user_timeline</a> endpoint has a limit of 300 requests per 15 minute window, <a href="https://twitter.com/abcdigital">@abcdigital</a> has around 240k followers so if using a single api key it  would take 240k / 300 = 800 15-min windows and a total time of 800 * 15 min = 12000 min (~8 days). So I ended up using multiple api keys and a one thread per api key, this was the simplest way to modifiy the code I had already written to fetch tweets from multiple users in parallel and since this is I/O bound python&#39;s <a href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a> would not be a problem.</p>
+<p>The crawler consisted originally of one thread that fetched followers and stored them into a queue, and another thread that popped users off the queue and fetched the user&#39;s tweets, all of this using a single api key. While writing the code I&#39;ve noticed that due to twitter&#39;s api limits this would take a very long time, in particular the part that obtained user&#39;s tweets. The <a href="https://dev.twitter.com/rest/reference/get/statuses/user_timeline">statuses/user_timeline</a> endpoint has a limit of 300 requests per 15 minute window, <a href="https://twitter.com/abcdigital">@abcdigital</a> has around 240k followers so if using a single api key it  would take 240k / 300 = 800 15-min windows and a total time of 800 * 15 min = 12000 min (~8 days). So I ended up using multiple api keys and a one thread per api key, this was the simplest way to modifiy the code I had already written. to fetch Since this task is I/O bound python&#39;s <a href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a> is not a concern and the threading module will be enough.</p>
 <pre><code class="language-python"><span class="keyword">import</span> time
 <span class="keyword">import</span> Queue
 <span class="keyword">import</span> datetime
@@ -2461,7 +2461,7 @@ In&nbsp;[14]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By grouping according to mobile platform and deleting duplicates entries as done before we get the following stats. I found it a bit odd that BlackBerry appeared second, they were once very popular but nowadays I hardly see anyone using them.</p>
+<p>By grouping according to mobile platform and deleting duplicates entries as done before we get the following stats. I found a bit odd that BlackBerry appeared second, they were once very popular but nowadays I hardly see anyone using them.</p>
 </div>
 </div>
 </div>
