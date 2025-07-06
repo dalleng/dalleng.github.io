@@ -1,18 +1,39 @@
 +++
 date = '2025-07-06T17:41:48-03:00'
-draft = true
 title = 'Trying out hugo'
 +++
 
-# My first post: trying out Hugo
+This post serves no purpose other than giving my first steps with [hugo](https://gohugo.io/)
 
-I have chosen Hugo because of how popular this open source tool is. I have seen it has plenty of themes and plugins. I hope to keep using it for a very long time.
-Foo bar jaz.
 
+## Hello hugo in python
 ```python
-def hello_hugo():
+def main():
     print("hello hugo")
 
 if __name__ == '__main__':
-    hello_hugo()
+    main()
 ```
+
+## Hello hugo in C
+```c
+#include <stdio.h>
+
+int main(int argc, char* argv[]) {
+    printf("hello hugo");
+}
+```
+
+## Some other random markdown
+
+### quote
+
+> What I cannot create, I do not understand
+
+Richard Feynman
+
+### ordered list
+
+1. A list
+2. of multiple
+3. things
