@@ -13,36 +13,29 @@ title = 'Diego Allen'
 [params]
   subtitle = "Software Engineer & Hobby Photographer"
 
-[Languages.en-us]
-  languageName = "English"
-  languageCode = "en-us"
-  contentDir = "content"
-  weight = 1
-
-  [Languages.en-us.params.author]
+  [params.author]
     avatar = "avatar.jpg" # put the file in assets folder; also ensure that image has same height and width
     # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
     intro = "Diego's blog"
     name = "Diego Allen"
     description = "Documenting thoughts, code, side projects."
 
-  [Languages.en-us.menu]
-  [[Languages.en-us.menu.main]]
+  [[menu.main]]
     pageRef="/"
     name = 'Home'
     url = '/'
     weight = 10
-  [[Languages.en-us.menu.main]]
+  [[menu.main]]
     pageRef="posts"
     name = 'Posts'
     url = '/posts/'
     weight = 20
-  [[Languages.en-us.menu.main]]
+  [[menu.main]]
     pageRef="til"
     name = 'TIL'
     url = 'https://til.diegoallen.me'
     weight = 30
-  [[Languages.en-us.menu.main]]
+  [[menu.main]]
     pageRef="about"
     name = 'About'
     url = 'https://about.diegoallen.me'
