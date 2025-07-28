@@ -30,10 +30,6 @@ To generate a more maze-like structure, we need to make a couple of key modifica
 The first tweak that needs to be added is to shuffle the directions in which we move. In order to add randomness to movements, rather than going straight to the exit. Added another interactive JS project with this modification below.
 The results look better but not quite right yet.
 
-The first improvement is to shuffle the directions in which [DFS](https://en.wikipedia.org/wiki/Depth-first_search) explores. This adds randomness to the traversal and avoids going straight to the end to make it more maze-like.
-
-Here’s the modified version, shown in the interactive playground below. The results are more interesting, but we’re still not quite there yet.
-
 <div id="container-2" data-height="1000"></div>
 <script src="https://cdn.jsdelivr.net/npm/livecodes@0.11.1/livecodes.umd.js"></script>
 <script>
