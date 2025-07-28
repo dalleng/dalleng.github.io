@@ -2,6 +2,9 @@ baseURL = 'https://diegoallen.me'
 languageCode = 'en-us'
 title = 'Diego Allen'
 
+[markup.goldmark.renderer]
+  unsafe = true
+
 [module]
   [[module.imports]]
     path = "github.com/hugo-sid/hugo-blog-awesome"
