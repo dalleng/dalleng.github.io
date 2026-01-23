@@ -42,7 +42,8 @@ The results look better but not quite right yet.
 
 ## Move 2 steps
 
-The second tweak is to move **two cells at a time** instead of one. We still go up, down, left, or right—but in increments of 2. This lets us leave walls between paths and creates more complex maze structures.
+The second tweak is to move **two cells at a time** instead of one. We still go up, down, left, or right—but in increments of 2. This lets us leave walls between paths and creates more complex maze structures. Found this
+technique while doing some online research.
 
 Here’s the final version with both tweaks applied:
 
