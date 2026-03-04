@@ -39,6 +39,11 @@ title = 'Diego Allen'
     url = 'https://til.diegoallen.me'
     weight = 30
   [[menu.main]]
+    pageRef="projects"
+    name = 'Projects'
+    url = '/projects/'
+    weight = 35
+  [[menu.main]]
     pageRef="about"
     name = 'About'
     url = 'https://about.diegoallen.me'
